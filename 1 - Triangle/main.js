@@ -15,32 +15,27 @@ const triangleFragmentCode = "" +
     "   gl_FragColor = Color;\n" +
     "}\0";
 
-main = function()
-{
+main = function() {
     const canvas = document.getElementById("canvas");
     const gl = canvas.getContext("webgl");
 
-    if(!gl)
-    {
+    if (!gl) {
         alert("Falha ao iniciar contexto WebGL.");
         return;
     }
 
-    if(!createShader(gl, triangleVertexCode, triangleFragmentCode))
-    {
+    if (!createShader(gl, triangleVertexCode, triangleFragmentCode)) {
         alert('Falha ao criar o shader program.');
         return;
     }
 
-    const vertex = new Float32Array
-    ([
+    const vertex = new Float32Array([
         0.0, 0.5, 0.0,
        -0.5,-0.5, 0.0,
         0.5,-0.5, 0.0
     ]);
 
-    const color = new Float32Array
-    ([
+    const color = new Float32Array([
         1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0
