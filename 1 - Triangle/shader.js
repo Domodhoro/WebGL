@@ -27,5 +27,4 @@ createShader = function(gl, triangleVertexCode, triangleFragmentCode) {
 
     gl.useProgram(glProgram);
     gl.program = glProgram;
-    return true;
 }
