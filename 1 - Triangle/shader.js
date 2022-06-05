@@ -22,7 +22,7 @@ createShader = function(gl, triangleVertexCode, triangleFragmentCode) {
 
     if (!gl.getProgramParameter(glProgram, gl.LINK_STATUS)) {
         alert("Falha ao criar o shader program.");
-        return false;
+        return;
     }
 
     gl.useProgram(glProgram);
