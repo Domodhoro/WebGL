@@ -24,10 +24,7 @@ main = function() {
         return;
     }
 
-    if (!createShader(gl, triangleVertexCode, triangleFragmentCode)) {
-        alert('Falha ao criar o shader program.');
-        return;
-    }
+    createShader(gl, triangleVertexCode, triangleFragmentCode);
 
     const vertex = new Float32Array([
         0.0, 0.5, 0.0,
