@@ -22,7 +22,7 @@ main = function() {
         return;
     }
 
-    const shader = new Shader(gl, triangleVertexCode, triangleFragmentCode);
+    new Shader(gl, triangleVertexCode, triangleFragmentCode);
 
     const vertex_coords = [
         0.0, 0.5, 0.0,
