@@ -1,30 +1,39 @@
-compileShader = function(gl, code, type) {
-    var shader = gl.createShader(type);
+class Shader {
+    constructor(gl, triangleVertexCode, triangleFragmentCode) {
+        this.gl = gl;
+        this.triangleVertexCode = triangleVertexCode;
+        this.triangleFragmentCode = triangleFragmentCode;
 
-    gl.shaderSource(shader, code);
-    gl.compileShader(shader);
+        const vertexShader = this.compileShader(this.gl, this.triangleVertexCode, this.gl.VERTEX_SHADER);
+        const fragmentShader = this.compileShader(this.gl, this.triangleFragmentCode, this.gl.FRAGMENT_SHADER);
+        const glProgram = this.gl.createProgram();
 
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        alert("Erro ao compilar: " + gl.getShaderInfoLog(shader));
-        return;
+        this.gl.attachShader(glProgram, vertexShader);
+        this.gl.attachShader(glProgram, fragmentShader);
+        this.gl.linkProgram(glProgram);
+
+        if (!this.gl.getProgramParameter(glProgram, this.gl.LINK_STATUS)) {
+            alert("Falha ao criar o shader program.");
+
+            return;
+        }
+
+        this.gl.useProgram(glProgram);
+        this.gl.program = glProgram;
     }
 
-    return shader;
-}
+    compileShader = function(gl, code, type) {
+        var shader = gl.createShader(type);
 
-createShader = function(gl, triangleVertexCode, triangleFragmentCode) {
-    const vertexShader = compileShader(gl, triangleVertexCode, gl.VERTEX_SHADER), fragmentShader = compileShader(gl, triangleFragmentCode, gl.FRAGMENT_SHADER);
-    const glProgram = gl.createProgram();
+        gl.shaderSource(shader, code);
+        gl.compileShader(shader);
 
-    gl.attachShader(glProgram, vertexShader);
-    gl.attachShader(glProgram, fragmentShader);
-    gl.linkProgram(glProgram);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            alert("Erro ao compilar: " + gl.getShaderInfoLog(shader));
 
-    if (!gl.getProgramParameter(glProgram, gl.LINK_STATUS)) {
-        alert("Falha ao criar o shader program.");
-        return;
+            return;
+        }
+
+        return shader;
     }
-
-    gl.useProgram(glProgram);
-    gl.program = glProgram;
 }
